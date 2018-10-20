@@ -8,11 +8,18 @@ public class Singleton {
 		System.out.println("create new object");
 	}
 	
-	public static synchronized Singleton getInstance()
+	public static Singleton getInstance()
 	{
 		if(singletonObject == null)
 		{
-			singletonObject = new Singleton();
+			synchronized(Singleton.class) 
+			{
+				if(singletonObject == null)
+				{
+					singletonObject = new Singleton();					
+				}
+				
+			}
 		}
 		return singletonObject;
 	}
